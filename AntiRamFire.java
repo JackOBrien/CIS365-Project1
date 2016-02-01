@@ -14,12 +14,14 @@ public class AntiRamFire extends Robot
 	public void run() {
 		
 		while(true) {
-			turnRight(5 * turnDirection);
+			turnRight(10 * turnDirection);
 		}
 	}
 
 	public void onScannedRobot(ScannedRobotEvent e) {
 		fire(3);
+		turnDirection = e.getBearing() >= 0 ? 1:-1;
+		scan();
 	}
 
 	public void onHitByBullet(HitByBulletEvent e) {
