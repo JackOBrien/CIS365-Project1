@@ -11,24 +11,68 @@ public class AntiRamFire extends Robot
 
 	int turnDirection = 1;	
 
+	boolean fight;
+
 	public void run() {
 		
 		while(true) {
+			setBodyColor(Color.blue);				
+			fight = false;
 			turnRight(10 * turnDirection);
 		}
 	}
 
 	public void onScannedRobot(ScannedRobotEvent e) {
+		turnDirection = e.getBearing() >= 0 ? 1:-1;		
+
 		fire(3);
-		turnDirection = e.getBearing() >= 0 ? 1:-1;
-		scan();
-	}
 
-	public void onHitByBullet(HitByBulletEvent e) {
-
+		if (e.getDistance() < 60) {
+			fight = true;
+			scan();
+		} else if (e.getDistance() < 300){ 	
+			fight = false;
+			if (e.getVelocity() == 0 && e.getDistance() > 200) {
+				fire(3);
+				scan();
+			}			
+	
+			runAway();
+		} else {
+			fight = false;
+			scan();
+		}
 	}
 	
-	public void onHitWall(HitWallEvent e) {
+	private void runAway() {
+		setBodyColor(Color.pink);
+		turnRight(70);
+		ahead(600);
+	}
 
+	public void onHitByBullet(HitByBulletEvent e) {	
+		//runAway();
+	}
+	
+	public void onHitWall(HitWallEvent e) {	
+
+		double heading = getHeading() % 90;
+		
+		if (heading == 0)
+			heading = 90;		
+
+		turnLeft(heading);
+		ahead(150);
+		turnLeft(90);
+		ahead(380);
 	}	
+	
+	public void onHitRobot(HitRobotEvent e) {
+		//runAway();
+		//turnDirection = e.getBearing() >= 0 ? 1:-1;
+		
+		//turnRight(e.getBearing());
+		
+		//fire(3);
+	}
 }
