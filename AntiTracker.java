@@ -4,9 +4,9 @@ import java.awt.Color;
 
 
 /**
- * AntiRamFire
+ * AntiTracker
  */
-public class AntiRamFire extends Robot
+public class AntiTracker extends Robot
 {
 
 	int turnDirection = 1;	
