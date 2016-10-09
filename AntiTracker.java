@@ -14,7 +14,7 @@ public class AntiTracker extends Robot
 {
 
 	/** Modifier to decide the direction AntiTracker will
-	 *	turn when searching for a target. */
+	 *  turn when searching for a target. */
 	private int turnDirection = 1;	
 
 	public void run() {
@@ -29,7 +29,7 @@ public class AntiTracker extends Robot
 	}
 
 	/** When a robot is scanned, we will fire at it, then
-	 *	decide if we can fire again or if we need to run away. */
+	 *  decide if we can fire again or if we need to run away. */
 	public void onScannedRobot(ScannedRobotEvent e) {
 		
 		setBodyColor(Color.green);
